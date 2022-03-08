@@ -1,0 +1,22 @@
+---
+- name: Generate Hosts File
+  hosts: leader
+  become: true
+  gather_facts: true
+  vars:
+    nodeip: var=ansible_eth1.ipv4.address
+  tasks:
+    - name: Initializing Kubernetes cluster
+      shell: kubeadm init --control-plane-endpoint 172.16.16.100:6443 --upload-certs --apiserver-advertise-address 172.16.16.101  --pod-network-cidr 192.168.0.0/16 --service-cidr 192.168.2.0/24
+      register: output
+    - name: Storing Logs and Generated token for future purpose.
+      local_action: copy content={{ output.stdout }} dest="./token"
+    - name: Copying required files
+      shell: |
+        mkdir -p $HOME/.kube
+        sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+        sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    - name: Install calico pod network
+      shell: kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.15/manifests/calico.yaml
+
+
