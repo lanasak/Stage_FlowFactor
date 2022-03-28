@@ -328,3 +328,13 @@ kubectl cluster-info
 kubectl get nodes
 kubectl get cs
 ```
+```console
+NAME             STATUS   ROLES    AGE   VERSION
+master1          Ready    master   47m   v1.19.2
+master2          Ready    master   43m   v1.19.2
+master3          Ready    master   40m   v1.19.2
+worker1          Ready    <none>   37m   v1.19.2
+worker2          Ready    <none>   34m   v1.19.2
+worker3          Ready    <none>   32m   v1.19.2
+
+```
