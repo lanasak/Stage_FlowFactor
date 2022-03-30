@@ -1,0 +1,22 @@
+---
+- name: Generate Hosts File
+  hosts: haproxy
+  become: true
+  gather_facts: true
+  vars:
+    my_file: /etc/haproxy/haproxy.cfg
+    my_template: templates/haproxy.j2
+  tasks:
+    - name: Install haproxy
+      apt: name=haproxy state=present
+    - name: Create "{{ my_file }}"
+      template:
+        src: "{{ my_template }}"
+        dest: "{{ my_file }}"
+        owner: root
+        group: root
+        mode: "0644"
+    - name: start haproxy service
+      service:
+        name: haproxy
+        state: started

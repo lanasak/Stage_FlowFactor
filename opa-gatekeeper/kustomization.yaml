@@ -1,0 +1,8 @@
+resources:
+  - block-nodeport-services
+  - containerlimits
+  - disallowanonymous
+  - externalip
+  - httpsOnly
+  - replicalimits
+  - requiredannotations
