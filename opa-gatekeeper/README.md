@@ -3,7 +3,7 @@
 ## Usage
 
 ### kustomize
-Install some or all of the templates alongside your own contraints [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/)  install some or all of the templates alongside your own contraints.  
+Install some or all of the templates alongside your own contraints [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/).
 
  Install everything with  `kubectl apply -k .`.
 

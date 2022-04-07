@@ -1,8 +1,4 @@
 resources:
-  - block-nodeport-services
-  - containerlimits
-  - disallowanonymous
-  - externalip
-  - httpsOnly
-  - replicalimits
-  - requiredannotations
+  - deploy\block-nodeport-services
+  - deploy\replicalimits
+  - deploy\httpsOnly
