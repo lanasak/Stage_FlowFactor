@@ -2,3 +2,5 @@ resources:
   - deploy\block-nodeport-services
   - deploy\replicalimits
   - deploy\httpsOnly
+
+    
