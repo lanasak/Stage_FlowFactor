@@ -3,13 +3,13 @@
 Er is overlap tussen een paar Gatekeeper policies en het creëren van Compliance Operator.
 
 #### Container limits
-Het verzoek van Pods die zijn gegenereerd door job-controller, is afgewezen door validation gatekeeper.
+Container limits: Vereist dat containers geheugen- en CPU-limieten hebben ingesteld en beperkt limieten om binnen de gespecificeerde maximumwaarden te blijven.  
+Probleem: Het verzoek van Pods die zijn gegenereerd door job-controller, is afgewezen door validation gatekeeper.
 
 #### Replica limits
-Het aanmaken van Deployment met minimaal 3 replicas is te veel voor het aanmaken van alle nodige Deployments van Compliance Operator.   
-Compliance Operator creëert Deployments met 1 replica.
-De objecten met het veld `spec.replicas` bij compliance-operator, ocp4-openshift-compliance-pp en rhcos4-openshift-compliance-pp deployment zijn gedefinieerd met 1 replica 
-
+Replica : Draait meerdere instanties van een Pod en houdt het opgegeven aantal Pods constant.  Met Replicalimits constraint zou vereisen dat objecten met het veld 'spec.replicas' aantal replica's specificeren binnen gedefinieerde bereiken.  
+Probleem: Het aanmaken van Deployment met minimaal 3 replicas is te veel voor het aanmaken van alle nodige Deployments van Compliance Operator.
+Compliance Operator creëert Deployments met 1 replica. De objecten met het veld spec.replicas bij compliance-operator, ocp4-openshift-compliance-pp en rhcos4-openshift-compliance-pp deployment zijn gedefinieerd met 1 replica.  
 
 
 Vb. Deployment compliance-operator.yaml
@@ -86,7 +86,9 @@ metadata:
 
 
 #### Required annotations
-Het is niet handig om altijd de owner als annotations te eisen bij het aanmaken van Service, automatische operators zoals compliance operator definieert geen owner annotation bij het aanmaken van Service.   
+Required annotations: Vereist dat bronnen gespecificeerde annotaties bevatten, met waarden die overeenkomen met de opgegeven reguliere expressies.  
+Probleem: Het is niet handig om altijd de owner als annotations te eisen bij het aanmaken van Service, automatische operators zoals compliance operator. Compliance operator definieert geen owner annotation bij het aanmaken van Service.  
+
 Vb. Service compliance-operator.yaml  
 ```
 kind: Service
@@ -154,7 +156,7 @@ status:
   loadBalancer: {}
 ```
 #### required labels
-Het ook is niet handig om altijd de owner label te eisen bij het aanmaken van namespace, het automatische installeren van operators zoals compliance operator definieert geen owner bij het aanmaken van namespace.  
+Het ook is niet handig om altijd de owner label te eisen bij het aanmaken van namespace, het automatische installeren van operators zoals compliance operator. Compliance Operator definieert geen owner bij het aanmaken van namespace.  
 
 Vb. Namespace compliance-operator.yaml
 ``` 
