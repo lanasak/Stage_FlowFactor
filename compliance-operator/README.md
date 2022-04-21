@@ -69,7 +69,7 @@ settingsRef:
   kind: ScanSetting
   name: default
 ```
-ArgoCD applicatie annmaken voor het scannen [cis-scan](/argocd/scan/scan.yaml)
+ArgoCD applicatie annmaken voor het scannen [cis-scan](/argocd/scan.yaml)
 ```
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -119,7 +119,7 @@ settingsRef:
   kind: ScanSetting
   name: default-auto-apply
 ``` 
-ArgoCD applicatie annmaken voor het scannen en toepassen ![scan-and-apply](/argocd/scan-and-apply.yaml)
+ArgoCD applicatie annmaken voor het scannen en toepassen [scan-and-apply](/argocd/scan-and-apply.yaml)
 ```
 apiVersion: compliance.openshift.io/v1alpha1
 kind: ScanSettingBinding
