@@ -54,7 +54,7 @@ We willen er nu voor zorgen dat de nodes op de juiste manier gescand worden.
 
 Hiervoor hebben we een ScanSettingsBinding nodig, deze bindt een profiel met scan-instellingen om scans te laten uitvoeren.  
 Alvorens dit te doen, moet je weten dat ArgoCD geen rechten heeft om dit soort bronnen te bekijken of te beheren. Dus, als een extra stap, moeten we ze toevoegen [clusterrole](compliance-operator/clusterrole.yaml), [clusterrole_binding](compliance-operator/clusterrole_binding.yaml).  
-ArgoCD applicatie aanmaken met [cis-scan](/argocd/scan/scan.yaml)
+ArgoCD applicatie aanmaken met [cis-scan](compliance-operator/scan/scan.yaml)
 ```
 apiVersion: compliance.openshift.io/v1alpha1
 kind: ScanSettingBinding
