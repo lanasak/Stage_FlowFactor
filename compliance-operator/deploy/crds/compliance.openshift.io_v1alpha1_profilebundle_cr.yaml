@@ -1,7 +1,0 @@
-  apiVersion: compliance.openshift.io/v1alpha1
-  kind: ProfileBundle
-  metadata:
-    name: rhcos4
-  spec:
-    contentImage: quay.io/user/ocp4-openscap-content@sha256:a1749f5150b19a9560a5732fe48a89f07bffc79c0832aa8c49ee5504590ae687 
-    contentFile: ssg-rhcos4-ds.xml
