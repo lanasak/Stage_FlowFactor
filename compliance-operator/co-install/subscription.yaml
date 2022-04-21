@@ -4,9 +4,8 @@ metadata:
   name: compliance-operator-sub
   namespace: openshift-compliance
 spec:
-  channel: alpha
+  channel: "release-0.1"
+  installPlanApproval: Automatic
   name: compliance-operator
-  source: compliance-operator
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
-  # uncomment to specify a version
-  #startingCSV: compliance-operator.v0.1.15
