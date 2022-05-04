@@ -30,3 +30,34 @@ oc apply -f /test/example_allowed.yaml
 oc apply -f /test/example_disallowed.yaml
 
 ```
+# Opa Gatekeeper/ArgoCD
+
+##  Gatekeeper ArgoCD applicatie aanmaken  voor het sycnroniseren en toepassen van policies met [opa_argocd](/argocd/opa_argocd.yaml)
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gatekeeperpolicy
+spec:
+  destination:
+    name: ''
+    namespace: openshift-operators
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: opa-gatekeeper/deploy/used_policies
+    repoURL: 'https://github.com/lanasak/Stage_FlowFactor'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+
+```
+
+De gatekeeperpolicy applicatie in de UI:  
+![gatekeeper](/images/gatekeeper.png)  
+
