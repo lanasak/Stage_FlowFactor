@@ -84,3 +84,10 @@ Nu, is de Gateway URL:
 set GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
 echo $GATEWAY_URL
 ```
+Voor het bekijken van de Product Pagina onder Service Mesh controle voegen we het pad */productpage* toe aan de gateway URL.
+![](/images/bookinfo.png) 
+
+Als we deze pagina een paar keer vernieuwen kunnen we zien dat hij door de Review Microservice versies loopt - met
+ - zwarte sterren
+ - geen sterren
+ - rode sterren  
