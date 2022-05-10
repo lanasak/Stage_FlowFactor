@@ -1,4 +1,3 @@
-
 # variable ibm_cloud_api_key {}
 #  variable "region" {} 
 #  variable ibm_cloud_datacenter{}

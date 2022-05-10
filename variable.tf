@@ -1,5 +1,5 @@
 variable "cluster_name" {
-  default     = "openshift"
+  default     = "secure_openshift"
 }
 
 variable "worker_zone" {
@@ -8,6 +8,7 @@ variable "worker_zone" {
 
 variable "worker_pool_flavor" {
   default     ="b3c.4x16"
+  
 }
 
 

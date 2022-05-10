@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"classic_openshift_single_zone_cluster","Source":"registry.terraform.io/terraform-ibm-modules/cluster/ibm//modules/classic-openshift-single-zone","Version":"1.5.0","Dir":".terraform/modules/classic_openshift_single_zone_cluster/modules/classic-openshift-single-zone"},{"Key":"","Source":"","Dir":"."}]}
