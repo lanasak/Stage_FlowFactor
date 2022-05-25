@@ -148,7 +148,7 @@ De encryptie valideren met Kiali
 
 - Role Based Access Control (RBAC) configureren:  
 Role Based Access Control bepaalt of een gebruiker of service een bepaalde actie mag uitvoeren binnen een project. Er kan mesh-, namespace- en workloadbrede toegangscontrole gedefinieerd worden voor de workloads in de mesh.  
- Beperk de toegang tot diensten buiten een namespace  [access-namespace](access-namespace.yaml)   
+ Beperk de toegang tot services buiten een namespace  [access-namespace](access-namespace.yaml)   
  Er kunnen verzoeken geweigerd worden van elke bron die niet in de bookinfo namespace staat met het volgende AuthorizationPolicy resource
  ```
  apiVersion: security.istio.io/v1beta1
