@@ -1,0 +1,18 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: httpbin-deny
+ namespace: bookinfo
+spec:
+ selector:
+   matchLabels:
+     app: httpbin
+     version: v1
+ action: DENY
+ rules:
+ - from:
+   - source:
+       notNamespaces: ["bookinfo"]
+
+       oc create secret generic cacerts -n istio-system --from-file ./ca-cert.pem --from-file ./ca-key.pem --from-file ./root-cert.pem --from-file ./cert-chain.pem
+      
