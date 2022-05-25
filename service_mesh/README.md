@@ -5,7 +5,7 @@
 - configureer het om het voorbeeldproject Bookinfo te gebruiken - te vinden op de upstream Istio site
 - demonstreer de verschillende mogelijkheden van OpenShift Service Mesh op het gebied van microservice management en visualisatie van het verkeer
 
-## Instructions
+## Instructies
 We moeten 4 Operators installeren: 
 - Elasticsearch
 - Red Hat OpenShift gedistribueerd tracing platform
@@ -111,6 +111,65 @@ oc replace -f https://raw.githubusercontent.com/istio/istio/master/samples/booki
 ```
 ![](/images/bookinfo-v3.png) 
 
+## Service Mesh Security:
+-	Mutual Transport Layer Security (mTLS):
+Mutual Transport Layer Security (mTLS) is een protocol dat twee partijen in staat stelt elkaar te authenticeren. Het is de standaard authenticatiemethode in sommige protocollen (IKE, SSH) en optioneel in andere (TLS). Er kan gebruik gemaakt van mTLS zonder wijzigingen in de applicatie- of servicecode. De TLS wordt volledig afgehandeld door de service mesh infrastructuur en tussen de twee sidecar proxies.  
+Het inschakelen van mTLS in uw mesh op control plane niveau beveiligt al het verkeer in de service mesh zonder herschrijven van de applicaties en workloads. Het beveiligen van namespaces in de mesh kan op data plane niveau in de ServiceMeshControlPlane resource. Om verbindingen voor verkeerscodering aan te passen, worden de namespaces geconfigureerd op applicatieniveau met PeerAuthentication en DestinationRule resources.  
+ [PeerAuthentication Policy](Policy.yaml)
 
+```
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: default
+  namespace: bookinfo
+spec:
+  peers:
+    - mtls: STRICT
+```
+ [DestinationRule](DestinationRule.yaml) 
+
+```
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: default
+  namespace: bookinfo
+spec:
+  host: "*.bookinfo.svc.cluster.local"
+  trafficPolicy:
+   tls:
+    mode: ISTIO_MUTUAL
+```
+
+De encryptie valideren met Kiali  
+![](/images/mtls.png)   
+![](/images/mTLS-encryptie.png) 
+
+- Role Based Access Control (RBAC) configureren:
+Role Based Access Control bepaalt of een gebruiker of service een bepaalde actie mag uitvoeren binnen een project. Er kan mesh-, namespace- en workloadbrede toegangscontrole gedefinieerd worden voor de workloads in de mesh.  
+ Beperk de toegang tot diensten buiten een namespace  [access-namespace](access-namespace.yaml)   
+ Er kunnen verzoeken geweigerd worden van elke bron die niet in de bookinfo namespace staat met het volgende AuthorizationPolicy resource
+ ```
+ apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: httpbin-deny
+ namespace: bookinfo
+spec:
+ selector:
+   matchLabels:
+     app: httpbin
+     version: v1
+ action: DENY
+ rules:
+ - from:
+   - source:
+       notNamespaces: ["bookinfo"]
+ ```
+ 
+
+
+ 
 
 
