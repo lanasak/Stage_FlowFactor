@@ -85,9 +85,32 @@ set GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath=
 echo $GATEWAY_URL
 ```
 Voor het bekijken van de Product Pagina onder Service Mesh controle voegen we het pad */productpage* toe aan de gateway URL.
-![](/images/bookinfo.png) 
+
 
 Als we deze pagina een paar keer vernieuwen kunnen we zien dat hij door de Review Microservice versies loopt - met
- - zwarte sterren
- - geen sterren
- - rode sterren  
+ - geen sterren v1  
+ ![](/images/bookinfo-v1.png)   
+ 
+ - zwarte sterren v2
+ ![](/images/bookinfo-v2.png.png)   
+ 
+ - rode sterren v3  
+ ![](/images/bookinfo.png) 
+
+Via Kiali, werd de topologie gevisualiseerd
+![](/images/kiali.png) 
+
+Hier worden de versies van de services getest. Stel dat we versie 1 niet meer willen gebruiken en nog niet zeker zijn of we verder willen gaan met versie 2 of 3. Dus we sturen 50% naar beide, ongeacht wie er is ingelogd:
+```
+oc replace -f https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/networking/virtual-service-reviews-v2-v3.yaml
+```
+Na herhaaldelijk verversen van de webpagina. We zien de helft van de resultaten met rode en de andere helft met zwarte sterren, zoals verwacht.   
+Stel dat we tevreden zijn met versie 3 en we willen die uitrollen naar 100% van het verkeer:
+```
+oc replace -f https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/networking/virtual-service-reviews-v3.yaml
+```
+![](/images/bookinfo-v3.png) 
+
+
+
+
