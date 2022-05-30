@@ -167,7 +167,30 @@ spec:
    - source:
        notNamespaces: ["bookinfo"]
  ```
- 
+  -	Configuring Role Based Access Control (RBAC):  
+Role-based access control objects bepalen of een gebruiker of service een bepaalde actie mag uitvoeren binnen een project. Er kan toegang worden gedefinieerd voor mesh, namespace en werklast-brede toegang voor uw werklasten in de mesh.  
+ Beperk de toegang tot diensten buiten een namespace:  
+ Verzoeken weigeren van elke bron die niet in de bookinfo namespace zit met de volgende AuthorizationPolicy  
+```
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: httpbin-deny
+ namespace: bookinfo
+spec:
+ selector:
+   matchLabels:
+     app: httpbin
+     version: v1
+ action: DENY
+ rules:
+ - from:
+   - source:
+       notNamespaces: ["bookinfo"]
+```
+- Een bestaand certificaat en sleutel toevoegen:  
+  Verifiëren of de certificaten zijn toegevoegd aan bookinfo applicatie.  
+  ![](/images/cacerts.png) 
 
 
  
